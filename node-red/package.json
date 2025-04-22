@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "bcryptjs": "^3.0.2",
-    "node-red-contrib-mqtt-broker": "^0.2.9",
-    "node-red-dashboard": "^3.6.5",
-    "node-red-node-serialport": "^2.0.3",
-    "node-red-node-ui-table": "^0.4.4"
-  }
-}
