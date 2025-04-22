@@ -1,0 +1,19 @@
+{
+  "devices": [
+    {
+      "id": "switch_test",
+      "name": "Przełącznik testowy",
+      "type": "switch",
+      "panel": "BinaryControl",
+      "panelType": "toggle",
+      "topic": "iot/device/switch_test",
+      "room": "living_room"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "living_room",
+      "name": "Salon"
+    }
+  ]
+}

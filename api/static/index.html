@@ -1,0 +1,71 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>System IoT - Panel sterowania</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>System IoT - Panel sterowania</h1>
+        <div class="status-indicator">
+          <div class="status-dot status-disconnected" id="mqtt-status"></div>
+          <span id="status-text">Łączenie z systemem...</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="sidebar">
+      <div class="rooms-nav">
+        <h3>Pomieszczenia</h3>
+        <ul id="rooms-list">
+          <!-- Lista pomieszczeń zostanie wygenerowana dynamicznie -->
+        </ul>
+      </div>
+      <div class="device-types">
+        <h3>Typy urządzeń</h3>
+        <ul>
+          <li><a href="#" data-filter="all" class="active">Wszystkie</a></li>
+          <li><a href="#" data-filter="switch">Włączniki</a></li>
+          <li><a href="#" data-filter="sensor">Czujniki</a></li>
+          <li><a href="#" data-filter="climate">Klimatyzacja</a></li>
+          <li><a href="#" data-filter="security">Bezpieczeństwo</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="container">
+        <div class="room-header" id="current-room-header">
+          <h2>Wszystkie urządzenia</h2>
+        </div>
+
+        <div class="dashboard" id="dashboard">
+          <!-- Tutaj będą dynamicznie dodawane panele urządzeń -->
+        </div>
+      </div>
+    </main>
+
+    <div class="notification" id="notification">Komunikat</div>
+
+    <footer>
+      <div class="container">
+        <p>System IoT © 2025</p>
+      </div>
+    </footer>
+
+    <!-- Skrypty -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js"></script>
+    <script src="/api/static/js/components/panel.js"></script>
+    <script src="/api/static/js/components/binary-control.js"></script>
+    <script src="/api/static/js/components/value-display.js"></script>
+    <script src="/api/static/js/components/value-control.js"></script>
+    <script src="/api/static/js/components/panel-factory.js"></script>
+    <script src="/api/static/js/mqtt-client.js"></script>
+    <script src="/api/static/js/api-client.js"></script>
+    <script src="/api/static/js/main.js"></script>
+  </body>
+</html>
