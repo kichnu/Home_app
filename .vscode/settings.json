@@ -1,3 +1,4 @@
 {
-  "python.defaultInterpreterPath": "/home/kichnu/Home_App/.venv/bin/python"
-}
+  "python.defaultInterpreterPath": "/home/kichnu/Home_App/.venv/bin/python",
+  "remote.SSH.remoteWorkspaceRoot": "~/Home_App"
+   }

@@ -286,25 +286,70 @@ class DeviceManager:
 
         return False
 
-    def send_command(self, device_id, command, mqtt_client):
-        """
-        Wysyła komendę do urządzenia przez MQTT.
+def send_command(self, device_id, command, mqtt_client):
+    """
+    Wysyła komendę do urządzenia przez MQTT.
 
-        Args:
-            device_id (str): ID urządzenia
-            command (str): Komenda do wysłania
-            mqtt_client: Klient MQTT
+    Args:
+        device_id (str): ID urządzenia
+        command (str or dict): Komenda do wysłania - może być stringiem lub słownikiem dla złożonych komend
+        mqtt_client: Klient MQTT
 
-        Returns:
-            bool: Status operacji
-        """
-        # Znajdź urządzenie o podanym ID
+    Returns:
+        bool: Status operacji
+    """
+    # Znajdź urządzenie o podanym ID
+    device = self.get_device(device_id)
+    if not device:
+        return False
+
+    # Ustaw temat komendy
+    command_topic = f"{device['topic']}/command"
+    
+    # Konwertuj komendę do JSON jeśli to słownik
+    command_str = command
+    if isinstance(command, dict):
+        import json
+        command_str = json.dumps(command)
+    
+    # Wyślij komendę
+    return mqtt_client.publish(command_topic, command_str)
+
+def handle_toggle_slider_command(self, device_id, command_str, mqtt_client):
+    """
+    Obsługuje komendę dla przełącznika ze sliderem.
+    
+    Args:
+        device_id (str): ID urządzenia
+        command_str (str): Komenda do przetworzenia
+        mqtt_client: Klient MQTT
+        
+    Returns:
+        bool: Status operacji
+    """
+    # Analizuj komendę
+    try:
+        value = float(command_str)
+        # Logika dla przełącznika ze sliderem - wartość 0 to OFF, wszystko inne to wartość ON
+        if value == 0:
+            # Urządzenie wyłączone
+            status = "off"
+        else:
+            # Urządzenie włączone z określoną wartością
+            status = "on"
+            
         device = self.get_device(device_id)
         if not device:
             return False
-
-        # Ustaw temat komendy
-        command_topic = f"{device['topic']}/command"
-
-        # Wyślij komendę
-        return mqtt_client.publish(command_topic, command)
+            
+        # Aktualizuj status urządzenia
+        status_topic = f"{device['topic']}/status"
+        mqtt_client.publish(status_topic, status)
+        
+        # Aktualizuj wartość urządzenia
+        value_topic = f"{device['topic']}/value"
+        mqtt_client.publish(value_topic, str(value))
+        
+        return True
+    except (ValueError, TypeError):
+        return False

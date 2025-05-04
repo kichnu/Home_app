@@ -8,12 +8,57 @@
       "panelType": "toggle",
       "topic": "iot/device/switch_test",
       "room": "living_room"
+    },
+    {
+      "id": "dim_light",
+      "name": "Lampa z przyciemnianiem",
+      "type": "dimmer",
+      "panel": "ValueControl",
+      "panelType": "toggle-slider",
+      "topic": "iot/device/dim_light",
+      "room": "living_room",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "defaultValue": 50
+    },
+    {
+      "id": "status_panel",
+      "name": "Panel statusów",
+      "type": "indicator",
+      "panel": "IndicatorDisplay",
+      "topic": "iot/device/status_panel",
+      "room": "living_room",
+      "indicators": [
+        {
+          "id": "main",
+          "label": "System",
+          "state": false
+        },
+        {
+          "id": "security",
+          "label": "Bezpieczeństwo",
+          "state": false
+        }
+      ],
+      "valueTopics": {
+        "security": "value/security"
+      }
     }
   ],
   "rooms": [
     {
       "id": "living_room",
       "name": "Salon"
+    },
+    {
+      "id": "kitchen",
+      "name": "Kuchnia"
+    },
+    {
+      "id": "bedroom",
+      "name": "Sypialnia"
     }
   ]
 }
