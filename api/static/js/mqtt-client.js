@@ -26,6 +26,8 @@ class MQTTClient {
       this.client = mqtt.connect(url, {
         clientId: this.clientId,
         clean: true,
+        username: "admin", // Dodaj nazwę użytkownika
+        password: "QNzNMsUFLpcG2qTc", // Dodaj hasło (to które ustawiłeś wcześniej)
         reconnectPeriod: 5000,
         connectTimeout: 30000,
       });
