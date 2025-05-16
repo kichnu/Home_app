@@ -1,6 +1,29 @@
 // main.js
 document.addEventListener("DOMContentLoaded", async () => {
-  // Inicjalizacja klientów
+
+  console.log("Inicjalizacja aplikacji...");
+
+
+
+  
+  
+
+  
+
+  // Przechowywanie stanu aplikacji
+  const appState = {
+    devices: [],
+    rooms: [],
+    panels: {},
+    currentRoom: "all",
+    currentFilter: "all",
+  };
+
+  window.appState = appState;
+
+  console.log("window.appState zainicjalizowany:", window.appState);
+
+    // Inicjalizacja klientów
   const apiClient = new APIClient();
   const mqttClient = new MQTTClient();
 
@@ -14,15 +37,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const statusText = document.getElementById("status-text");
   const notification = document.getElementById("notification");
   const currentRoomHeader = document.getElementById("current-room-header");
-
-  // Przechowywanie stanu aplikacji
-  const appState = {
-    devices: [],
-    rooms: [],
-    panels: {},
-    currentRoom: "all",
-    currentFilter: "all",
-  };
 
   // Funkcja do wyświetlania powiadomień
   function showNotification(message, isError = false) {
