@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (status.status === "ok") {
         const mqttConnected = status.mqtt_connected;
+        console.log("Status MQTT z API:", mqttConnected);
 
         if (mqttConnected) {
           mqttStatusDot.classList.remove("status-disconnected");
@@ -63,9 +64,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           statusText.textContent = "Połączono z systemem";
 
           // Jeśli MQTT jest dostępne, ale jeszcze nie połączone, połącz
-          if (!mqttClient.isConnected) {
-            mqttClient.connect();
-          }
+          // if (!mqttClient.isConnected) {
+          //   mqttClient.connect();
+          // }
+            // Oznacz wszystkie urządzenia jako online
+          Object.values(appState.panels).forEach(panel => {
+          panel.updateConnectionStatus(true);
+          });
+
+
+
+
         } else {
           mqttStatusDot.classList.remove("status-connected");
           mqttStatusDot.classList.add("status-disconnected");

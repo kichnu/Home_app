@@ -234,26 +234,49 @@ class ValueControl extends Panel {
   //   }
   // }
 
+  // sendCommand(command) {
+  //   if (window.mqttClient && this.isConnected) {
+  //       console.log(`Próba wysłania komendy do ${this.commandTopic}: ${command}`);
+  //       window.mqttClient.publish(this.commandTopic, command);
+  //       console.log(`Komenda wysłana do ${this.commandTopic}: ${command}`);
+  //   } else {
+  //       console.log(`Device ${this.id} is offline or MQTT not connected - próba przez API`);
+  //       // Alternatywnie można wysłać przez API
+  //       fetch(`/api/device/${this.id}/control`, {
+  //           method: "POST",
+  //           headers: {
+  //               "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify({ command }),
+  //       })
+  //       .then(response => response.json())
+  //       .then(data => console.log("Odpowiedź API:", data))
+  //       .catch(error => console.error("Błąd API:", error));
+  //   }
+  // }
+
   sendCommand(command) {
-    if (window.mqttClient && this.isConnected) {
-        console.log(`Próba wysłania komendy do ${this.commandTopic}: ${command}`);
-        window.mqttClient.publish(this.commandTopic, command);
-        console.log(`Komenda wysłana do ${this.commandTopic}: ${command}`);
-    } else {
-        console.log(`Device ${this.id} is offline or MQTT not connected - próba przez API`);
-        // Alternatywnie można wysłać przez API
-        fetch(`/api/device/${this.id}/control`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ command }),
-        })
-        .then(response => response.json())
-        .then(data => console.log("Odpowiedź API:", data))
-        .catch(error => console.error("Błąd API:", error));
-    }
+  console.log(`Próba wysłania komendy dla ${this.id}: ${command}`);
+  
+  // Zawsze używaj API, ignoruj status MQTT
+  fetch(`/api/device/${this.id}/control`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ command }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Odpowiedź API:", data);
+  })
+  .catch(error => {
+    console.error("Błąd API:", error);
+  });
 }
+
+
+
 
   // Aktualizacja stanu
   updateContent(data, topic) {

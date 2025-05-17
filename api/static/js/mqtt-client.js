@@ -22,6 +22,12 @@ class MQTTClient {
 
     console.log("Łączenie z MQTT:", url);
 
+    this.connectTimeout = setTimeout(() => {
+    console.log("Timeout połączenia MQTT - przełączam na API");
+    this.isConnected = false;
+    window.dispatchEvent(new Event("mqtt-timeout"));
+    }, 5000);
+
     try {
       this.client = mqtt.connect(url, {
         clientId: this.clientId,
