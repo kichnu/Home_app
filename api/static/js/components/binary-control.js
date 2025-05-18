@@ -125,10 +125,30 @@ class BinaryControl extends Panel {
   // });
   // }
 
-  sendCommand(command) {
-  console.log(`Próba wysłania komendy dla ${this.id}: ${command}`);
+//   sendCommand(command) {
+//   console.log(`Próba wysłania komendy dla ${this.id}: ${command}`);
   
-  // Zawsze używaj API, ignoruj status MQTT
+//   // Zawsze używaj API, ignoruj status MQTT
+//   fetch(`/api/device/${this.id}/control`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ command }),
+//   })
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log("Odpowiedź API:", data);
+//   })
+//   .catch(error => {
+//     console.error("Błąd API:", error);
+//   });
+// }
+
+  // W obu plikach
+sendCommand(command) {
+  console.log(`Wysyłanie komendy dla ${this.id}: ${command}`);
+  
   fetch(`/api/device/${this.id}/control`, {
     method: "POST",
     headers: {
@@ -139,11 +159,23 @@ class BinaryControl extends Panel {
   .then(response => response.json())
   .then(data => {
     console.log("Odpowiedź API:", data);
+    // Opcjonalnie: automatyczna aktualizacja UI po potwierdzeniu
+    if (data.status === "ok") {
+      // Aktualizuj UI w zależności od typu kontrolki
+      if (this.panelType === "toggle-slider") {
+        // Kod aktualizacji dla toggle-slider
+      } else if (this.panelType === "toggle") {
+        // Kod aktualizacji dla toggle
+      }
+    }
   })
   .catch(error => {
     console.error("Błąd API:", error);
   });
 }
+
+
+
 
   // Aktualizacja stanu
   updateContent(data) {

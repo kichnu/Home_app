@@ -43,18 +43,34 @@ class APIClient {
     }
   }
 
-  async getDeviceStatus(deviceId) {
+  // async getDeviceStatus(deviceId) {
+  //   try {
+  //     const response = await fetch(`${this.baseUrl}/device/${deviceId}/status`);
+  //     if (!response.ok) {
+  //       throw new Error(`Status HTTP: ${response.status}`);
+  //     }
+  //     return await response.json();
+  //   } catch (error) {
+  //     console.error(`Błąd pobierania statusu urządzenia ${deviceId}:`, error);
+  //     throw error;
+  //   }
+  // }
+
+    async getDevicesStatus() {
     try {
-      const response = await fetch(`${this.baseUrl}/device/${deviceId}/status`);
+      const response = await fetch(`${this.baseUrl}/devices/status`);
       if (!response.ok) {
         throw new Error(`Status HTTP: ${response.status}`);
       }
       return await response.json();
     } catch (error) {
-      console.error(`Błąd pobierania statusu urządzenia ${deviceId}:`, error);
+      console.error("Błąd pobierania statusu urządzeń:", error);
       throw error;
     }
   }
+
+
+
 
   async controlDevice(deviceId, command) {
     try {

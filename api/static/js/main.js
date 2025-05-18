@@ -3,13 +3,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   console.log("Inicjalizacja aplikacji...");
 
-
-
-  
-  
-
-  
-
   // Przechowywanie stanu aplikacji
   const appState = {
     devices: [],
@@ -101,6 +94,69 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
     }
   }
+
+//   function updateDevicesStatus(statuses) {
+//   Object.entries(statuses).forEach(([deviceId, status]) => {
+//     const panel = appState.panels[deviceId];
+//     if (panel) {
+//       // Aktualizuj status połączenia
+//       panel.updateConnectionStatus(status.online);
+      
+//       // Aktualizuj zawartość panelu
+//       if (status.status !== null) {
+//         panel.updateContent(status.status);
+//       }
+      
+//       // Aktualizuj wartości
+//       if (status.values) {
+//         Object.entries(status.values).forEach(([valueName, value]) => {
+//           // Tworzenie pseudo-tematu dla kompatybilności z istniejącym kodem
+//           const pseudoTopic = `${panel.topic}/value/${valueName}`;
+//           panel.updateContent(value, pseudoTopic);
+//         });
+//       }
+//     }
+//   });
+// }
+
+//   async function checkStatus() {
+//   try {
+//     const status = await apiClient.checkStatus();
+    
+//     if (status.status === "ok") {
+//       const backendConnected = status.mqtt_connected;
+      
+//       mqttStatusDot.classList.toggle("status-connected", backendConnected);
+//       mqttStatusDot.classList.toggle("status-disconnected", !backendConnected);
+      
+//       statusText.textContent = backendConnected 
+//         ? "Połączono z systemem" 
+//         : "Problem z połączeniem do urządzeń";
+      
+//       // Aktualizacja statusu paneli
+//       Object.values(appState.panels).forEach(panel => {
+//         panel.updateConnectionStatus(backendConnected);
+//       });
+      
+//       // Jeśli backend jest połączony, pobierz aktualny stan urządzeń
+//       if (backendConnected) {
+//         try {
+//           const devicesStatus = await apiClient.getDevicesStatus();
+//           updateDevicesStatus(devicesStatus);
+//         } catch (error) {
+//           console.error("Błąd pobierania statusów urządzeń:", error);
+//         }
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Błąd podczas sprawdzania statusu:", error);
+//     mqttStatusDot.classList.remove("status-connected");
+//     mqttStatusDot.classList.add("status-disconnected");
+//     statusText.textContent = "Brak połączenia z API";
+//   }
+// }
+
+// Funkcja aktualizująca stan urządzeń
 
   // Funkcja ładująca konfigurację urządzeń
   async function loadDevices() {
