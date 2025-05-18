@@ -87,65 +87,7 @@ class BinaryControl extends Panel {
     this.sendCommand("trigger");
   }
 
-  // Wysyłanie komendy
-  // sendCommand(command) {
-  //   if (window.mqttClient && this.isConnected) {
-  //     window.mqttClient.publish(this.commandTopic, command);
-  //     console.log(`Sent command to ${this.commandTopic}: ${command}`);
-  //   } else {
-  //     console.log(`Device ${this.id} is offline or MQTT not connected`);
-  //     // Alternatywnie można wysłać przez API
-  //     fetch(`/api/device/${this.id}/control`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ command }),
-  //     });
-  //   }
-  // }
 
-  // sendCommand(command) {
-  // console.log(`BinaryControl: próba wysłania komendy dla ${this.id}: ${command}`);
-  
-  // // Zawsze używaj API zamiast MQTT dla uproszczenia
-  // fetch(`/api/device/${this.id}/control`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({ command }),
-  // })
-  // .then(response => response.json())
-  // .then(data => {
-  //   console.log(`BinaryControl: odpowiedź API dla ${this.id}:`, data);
-  // })
-  // .catch(error => {
-  //   console.error(`BinaryControl: błąd API dla ${this.id}:`, error);
-  // });
-  // }
-
-//   sendCommand(command) {
-//   console.log(`Próba wysłania komendy dla ${this.id}: ${command}`);
-  
-//   // Zawsze używaj API, ignoruj status MQTT
-//   fetch(`/api/device/${this.id}/control`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ command }),
-//   })
-//   .then(response => response.json())
-//   .then(data => {
-//     console.log("Odpowiedź API:", data);
-//   })
-//   .catch(error => {
-//     console.error("Błąd API:", error);
-//   });
-// }
-
-  // W obu plikach
 sendCommand(command) {
   console.log(`Wysyłanie komendy dla ${this.id}: ${command}`);
   
